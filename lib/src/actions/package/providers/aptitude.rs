@@ -107,9 +107,10 @@ impl PackageProvider for Aptitude {
                     arguments: vec![
                         String::from("-y"),
                         format!(
-                            "deb [arch=$(dpkg --print-architecture) {}] {}",
+                            "deb [arch=$(dpkg --print-architecture) {}] {} $(. /etc/os-release && echo \"$VERSION_CODENAME\") {}",
                             signed_by,
-                            repository.name.clone()
+                            repository.name.clone(),
+			    repository.modifiers.clone() .unwrap_or(vec![]).join(" "),
                         ),
                     ],
                     environment: self.env(),

@@ -18,6 +18,9 @@ pub struct PackageRepository {
 
     #[serde(default)]
     pub provider: PackageProviders,
+
+    #[serde(default)]
+    pub modifiers: Option<Vec<String>>,
 }
 
 #[derive(JsonSchema, Clone, Debug, Default, Serialize, Deserialize)]
